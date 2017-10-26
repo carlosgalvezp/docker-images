@@ -15,13 +15,8 @@ WORKDIR /opt
 # Install basics
 RUN apt-get update && \
     apt-get install --assume-yes build-essential \
-                                 wget
-
-# Install CMake
-RUN wget https://cmake.org/files/v$CMAKE_VERSION_MAJOR/$CMAKE_TGZ && \
+                                 wget && \
+    wget https://cmake.org/files/v$CMAKE_VERSION_MAJOR/$CMAKE_TGZ && \
     tar xzf $CMAKE_TGZ && \
-    rm $CMAKE_TGZ
-
-# Clean up
-RUN apt-get remove --purge --assume-yes wget && \
+    rm $CMAKE_TGZ  && \
     rm -rf /var/lib/apt/lists/*
