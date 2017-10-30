@@ -15,8 +15,4 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/${ARM
     tar xvjf ${ARM_TOOLCHAIN}-linux.tar.bz2 && \
     rm ${ARM_TOOLCHAIN}-linux.tar.bz2
 
-# Create docker user and add to dialout group
-RUN useradd --no-create-home docker && \
-    usermod -a -G dialout docker
-
 USER docker
