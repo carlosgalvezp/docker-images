@@ -15,7 +15,9 @@ WORKDIR /opt
 # Install basics
 RUN apt-get update && \
     apt-get install --assume-yes build-essential \
-                                 wget && \
+                                 wget \
+                                 python3-dev \
+                                 python3-pip && \
     wget https://cmake.org/files/v$CMAKE_VERSION_MAJOR/$CMAKE_TGZ && \
     tar xzf $CMAKE_TGZ && \
     rm $CMAKE_TGZ  && \
