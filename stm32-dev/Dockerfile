@@ -7,7 +7,7 @@ WORKDIR /opt
 
 # Install stm2flash
 RUN apt-get update && \
-    apt-get install -y stm32flash && \
+    apt-get install -y --no-install-recommends stm32flash && \
     rm -rf /var/lib/apt/lists/*
 
 # Install ARM GCC toolchain
@@ -18,7 +18,7 @@ RUN wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/7-2018q2/${ARM
 # Install dfu-utils (http://dfu-util.sourceforge.net/build.html)
 RUN apt-get update && \
     apt-get build-dep -y dfu-util && \
-    apt-get install -y git libusb-1.0-0-dev && \
+    apt-get install -y --no-install-recommends  git libusb-1.0-0-dev && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone git://git.code.sf.net/p/dfu-util/dfu-util && \
@@ -31,6 +31,14 @@ RUN git clone git://git.code.sf.net/p/dfu-util/dfu-util && \
     cp doc/40-dfuse.rules /etc/udev/rules.d/ && \
     cd .. && \
     rm -rf dfu-util
+
+# Install minicom
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends minicom && \
+    rm -rf /var/lib/apt/lists/*
+
+# Remove HW flow control in default minicom settings
+RUN echo "pu rtscts           No" > /etc/minicom/minirc.dfl
 
 ENV PATH /opt/${ARM_TOOLCHAIN}/bin:$PATH
 
