@@ -40,5 +40,8 @@ RUN apt-get update && \
 # Remove HW flow control in default minicom settings
 RUN echo "pu rtscts           No" > /etc/minicom/minirc.dfl
 
+# Install Python packages
+RUN pip3 install pyserial
+
 ENV PATH /opt/${ARM_TOOLCHAIN}/bin:$PATH
 
